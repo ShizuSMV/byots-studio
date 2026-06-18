@@ -1,0 +1,82 @@
+// ————————————————————————————
+// Slide-in animations — mobile-first
+// ————————————————————————————
+
+// Base: mobile — offset réduit pour ne pas couper le contenu
+[data-slide] {
+  opacity: 0;
+  transition: opacity 0.55s $ease, transform 0.55s $ease;
+
+  &[data-slide='up']    { transform: translateY(18px); }
+  &[data-slide='left']  { transform: translateX(-18px); }
+  &[data-slide='right'] { transform: translateX(18px); }
+
+  // Desktop — offset plus ample
+  @media (min-width: 640px) {
+    &[data-slide='up']    { transform: translateY(30px); }
+    &[data-slide='left']  { transform: translateX(-30px); }
+    &[data-slide='right'] { transform: translateX(30px); }
+  }
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// Délais de stagger (data-delay="1" → 80ms, etc.)
+@for $i from 1 through 8 {
+  [data-delay='#{$i}'] { transition-delay: #{$i * 80}ms; }
+}
+
+// ————————————————————————————
+// Hero entrance — mobile-first
+// ————————————————————————————
+
+.hero__top,
+.hero__heading-wrap,
+.hero__bottom,
+.hero__marquee {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s $ease, transform 0.7s $ease;
+}
+
+.hero--loaded {
+  .hero__top {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0ms;
+  }
+
+  .hero__heading-wrap {
+    opacity: 1;
+    transform: none;
+    transition-delay: 120ms;
+  }
+
+  .hero__bottom {
+    opacity: 1;
+    transform: none;
+    transition-delay: 280ms;
+  }
+
+  .hero__marquee {
+    opacity: 1;
+    transform: none;
+    transition-delay: 440ms;
+  }
+}
+
+// Respect prefers-reduced-motion
+@media (prefers-reduced-motion: reduce) {
+  [data-slide],
+  .hero__top,
+  .hero__heading-wrap,
+  .hero__bottom,
+  .hero__marquee {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

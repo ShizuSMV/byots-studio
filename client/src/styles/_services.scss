@@ -1,0 +1,188 @@
+.services {
+  padding: $section-py 0;
+  border-bottom: 1px solid $c-border;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      max-width: 480px;
+    }
+  }
+}
+
+.svc {
+  background: $c-surface;
+  border: 1px solid $c-border;
+  border-top: 2px solid var(--sa, #{$c-accent});
+  border-radius: $radius-lg;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: background $transition, border-color $transition, box-shadow 0.35s $ease, transform 0.25s $ease;
+
+  &--visible {
+    animation: card-enter 0.65s $ease both;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  &:hover {
+    background: $c-card;
+    border-color: $c-border-2;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  }
+
+  &--featured {
+    background: $c-card;
+    border-color: color-mix(in srgb, var(--sa, #{$c-accent}) 30%, transparent);
+    position: relative;
+
+    &::before {
+      content: 'Populaire';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sa, #{$c-accent});
+      border: 1px solid color-mix(in srgb, var(--sa, #{$c-accent}) 40%, transparent);
+      background: color-mix(in srgb, var(--sa, #{$c-accent}) 12%, transparent);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    &:hover {
+      border-color: color-mix(in srgb, var(--sa, #{$c-accent}) 50%, transparent);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 0 1px color-mix(in srgb, var(--sa, #{$c-accent}) 15%, transparent);
+    }
+
+    .svc__cta {
+      background: var(--sa, #{$c-heading});
+      color: #fff;
+      border-color: var(--sa, #{$c-heading});
+
+      &:hover {
+        background: color-mix(in srgb, var(--sa, #{$c-heading}) 80%, white);
+        border-color: color-mix(in srgb, var(--sa, #{$c-heading}) 80%, white);
+        box-shadow: 0 8px 28px color-mix(in srgb, var(--sa, #{$c-heading}) 35%, transparent);
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  &__num {
+    font-family: $font-heading;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: $c-muted;
+    letter-spacing: 0.1em;
+    padding-top: 4px;
+    flex-shrink: 0;
+  }
+
+  &__name {
+    font-family: $font-heading;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $c-heading;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+
+  &__tagline {
+    font-size: 0.83rem;
+    color: $c-text-sec;
+    line-height: 1.5;
+  }
+
+  &__price {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid $c-border;
+
+    &-from {
+      font-size: 0.7rem;
+      color: $c-text-dim;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    &-amount {
+      font-family: $font-heading;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--sa, #{$c-heading});
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    &-text {
+      font-family: $font-heading;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--sa, #{$c-heading});
+      letter-spacing: -0.02em;
+    }
+  }
+
+  &__features {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    flex: 1;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: $c-text-sec;
+      line-height: 1.45;
+
+      svg {
+        flex-shrink: 0;
+        margin-top: 2px;
+        color: var(--sa, #{$c-accent});
+      }
+    }
+  }
+
+  &__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 20px;
+    font-family: $font-heading;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: $c-text;
+    border: 1px solid $c-border-2;
+    border-radius: $radius;
+    transition: all $transition;
+    background: none;
+    cursor: pointer;
+
+    &:hover {
+      color: $c-heading;
+      border-color: $c-muted;
+      background: rgba(255, 255, 255, 0.03);
+    }
+  }
+}

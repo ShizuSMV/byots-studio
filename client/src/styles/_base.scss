@@ -1,0 +1,125 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: $font-body;
+  background: $c-bg;
+  color: $c-text;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a    { color: inherit; text-decoration: none; transition: color $transition; }
+button { background: none; border: none; cursor: pointer; font-family: inherit; font-size: inherit; color: inherit; }
+img, svg { display: block; max-width: 100%; }
+ul   { list-style: none; }
+
+// ————————————————————————————
+// Layout
+// ————————————————————————————
+.section__inner {
+  max-width: $inner-max;
+  margin: 0 auto;
+  padding: 0 $inner-px;
+}
+
+.section__header {
+  margin-bottom: clamp(48px, 7vw, 80px);
+}
+
+.section__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: $font-heading;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: $c-accent;
+  margin-bottom: 20px;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: $c-accent;
+    flex-shrink: 0;
+  }
+}
+
+.section__title {
+  font-family: $font-heading;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: $c-heading;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.section__subtitle {
+  margin-top: 16px;
+  font-size: 1rem;
+  color: $c-text-sec;
+  max-width: 520px;
+  line-height: 1.75;
+}
+
+// ————————————————————————————
+// Forms
+// ————————————————————————————
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+
+  label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $c-text-dim;
+  }
+
+  input, textarea, select {
+    background: $c-bg;
+    border: 1px solid $c-border-2;
+    border-radius: $radius;
+    color: $c-heading;
+    font-family: $font-body;
+    font-size: 0.95rem;
+    padding: 12px 16px;
+    transition: border-color $transition;
+    outline: none;
+    resize: none;
+
+    &::placeholder { color: $c-muted; }
+    &:focus { border-color: $c-accent; }
+    option { background: $c-surface; }
+  }
+}
+
+// ————————————————————————————
+// Shared entrance animation
+// ————————————————————————————
+@keyframes card-enter {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+// ————————————————————————————
+// Divider
+// ————————————————————————————
+.divider {
+  width: 100%;
+  height: 1px;
+  background: $c-border;
+}

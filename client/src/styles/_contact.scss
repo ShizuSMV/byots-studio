@@ -1,0 +1,108 @@
+.contact {
+  padding: $section-py 0;
+  border-bottom: 1px solid $c-border;
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: $c-border;
+    border: 1px solid $c-border;
+    margin-top: clamp(40px, 6vw, 64px);
+
+    @media (max-width: 860px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__info {
+    padding: 48px 40px;
+    background: $c-surface;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @media (max-width: 540px) { padding: 32px 24px; }
+  }
+
+  &__heading {
+    font-family: $font-heading;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: $c-heading;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  &__text {
+    font-size: 0.95rem;
+    color: $c-text-sec;
+    line-height: 1.75;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: $c-text-sec;
+
+      svg { color: $c-accent; flex-shrink: 0; }
+      a:hover { color: $c-accent-lt; }
+    }
+  }
+
+  &__form {
+    padding: 48px 40px;
+    background: $c-bg;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 540px) { padding: 32px 24px; }
+  }
+
+  &__success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+    flex: 1;
+    justify-content: center;
+
+    svg circle, svg path { stroke: $c-accent; }
+
+    p {
+      color: $c-text-sec;
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+  }
+
+  &__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    font-family: $font-heading;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: $c-bg;
+    background: $c-heading;
+    border-radius: $radius;
+    transition: all $transition;
+    margin-top: 8px;
+
+    &:hover {
+      background: $c-white;
+      transform: translateY(-1px);
+    }
+  }
+}

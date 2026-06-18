@@ -1,0 +1,315 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid $c-border;
+
+  &__orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+
+    &--1 {
+      width: 800px;
+      height: 800px;
+      top: -250px;
+      left: -200px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+      filter: blur(60px);
+      animation: orb-drift-1 18s ease-in-out infinite alternate;
+    }
+
+    &--2 {
+      width: 500px;
+      height: 500px;
+      bottom: 80px;
+      right: -80px;
+      background: radial-gradient(circle, rgba($c-accent, 0.12) 0%, transparent 65%);
+      filter: blur(70px);
+      animation: orb-drift-2 22s ease-in-out infinite alternate;
+    }
+
+    &--3 {
+      width: 300px;
+      height: 300px;
+      top: 40%;
+      left: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.025) 0%, transparent 70%);
+      filter: blur(50px);
+    }
+  }
+
+  &__inner {
+    flex: 1;
+    max-width: $inner-max;
+    margin: 0 auto;
+    padding: 0 $inner-px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 140px;
+    padding-bottom: 56px;
+    gap: 48px;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: $c-text-dim;
+  }
+
+  &__dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $c-accent;
+    animation: blink 3s ease-in-out infinite;
+  }
+
+  &__year {
+    font-size: 0.78rem;
+    color: $c-muted;
+    letter-spacing: 0.08em;
+  }
+
+  &__heading-wrap {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    flex: 1;
+  }
+
+  &__title-glass {
+    display: inline-block;
+    padding: clamp(20px, 3vw, 32px) clamp(20px, 3.5vw, 40px);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: $radius-lg;
+    box-shadow:
+      0 4px 32px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    position: relative;
+    overflow: hidden;
+
+    // halo blanc diffus à l'intérieur
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 35% 40%, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 700;
+    font-size: clamp(4rem, 11vw, 10rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: $c-heading;
+    position: relative;
+
+    &-row {
+      display: block;
+
+      &--indent {
+        padding-left: clamp(40px, 8vw, 120px);
+
+        em {
+          font-style: italic;
+          font-weight: 300;
+          color: $c-accent;
+        }
+      }
+    }
+  }
+
+  &__side-text {
+    flex-shrink: 0;
+    max-width: 200px;
+    padding-bottom: 8px;
+
+    p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: $c-text-sec;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid $c-border;
+    flex-wrap: wrap;
+  }
+
+  &__stats {
+    display: flex;
+    gap: 48px;
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &-num {
+      font-family: $font-heading;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: $c-heading;
+      line-height: 1;
+    }
+
+    &-lbl {
+      font-size: 0.75rem;
+      color: $c-text-dim;
+      letter-spacing: 0.06em;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  &__btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 28px;
+    font-family: $font-heading;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: $c-bg;
+    background: $c-heading;
+    border-radius: $radius;
+    transition: all $transition;
+
+    &:hover {
+      background: $c-white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  &__btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 24px;
+    font-family: $font-heading;
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: $c-text-sec;
+    border: 1px solid $c-border-2;
+    border-radius: $radius;
+    transition: all $transition;
+
+    &:hover {
+      color: $c-heading;
+      border-color: $c-muted;
+    }
+  }
+
+  // Marquee strip
+  &__marquee {
+    flex-shrink: 0;
+    border-top: 1px solid $c-border;
+    padding: 14px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+
+    &-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 40s linear infinite;
+    }
+
+    &-item {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: $c-muted;
+      white-space: nowrap;
+      padding: 0 4px;
+    }
+
+    &-sep {
+      color: $c-accent;
+      margin: 0 20px;
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    &__heading-wrap {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+    }
+
+    &__side-text { max-width: 100%; }
+
+    &__title { font-size: clamp(3.5rem, 14vw, 7rem); }
+  }
+
+  @media (max-width: 600px) {
+    &__stats { gap: 28px; }
+
+    &__actions { flex-direction: column; align-items: stretch; }
+
+    &__btn-primary, &__btn-ghost {
+      text-align: center;
+      justify-content: center;
+    }
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes orb-drift-1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(60px, 40px) scale(1.1); }
+}
+
+@keyframes orb-drift-2 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-40px, -30px) scale(0.9); }
+}

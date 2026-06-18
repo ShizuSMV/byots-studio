@@ -1,0 +1,119 @@
+.result-page {
+  min-height: 100vh;
+  background: $c-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px $inner-px;
+
+  &__card {
+    background: $c-surface;
+    border: 1px solid $c-border-2;
+    border-radius: $radius-lg;
+    padding: 56px 48px;
+    max-width: 540px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    h1 {
+      font-family: $font-heading;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: $c-heading;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      color: $c-text-sec;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    &--success { border-color: rgba($c-accent, 0.3); }
+
+    @media (max-width: 560px) { padding: 36px 24px; }
+  }
+
+  &__ref {
+    font-size: 0.78rem;
+    color: $c-text-dim;
+
+    code {
+      background: $c-card;
+      padding: 2px 8px;
+      border-radius: $radius;
+      font-family: monospace;
+    }
+  }
+
+  &__next {
+    background: $c-card;
+    border: 1px solid $c-border;
+    border-radius: $radius-md;
+    padding: 24px;
+    text-align: left;
+    width: 100%;
+
+    h3 {
+      font-family: $font-heading;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: $c-heading;
+      margin-bottom: 14px;
+    }
+
+    ol {
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      li {
+        font-size: 0.85rem;
+        color: $c-text-sec;
+        line-height: 1.5;
+        &::marker { color: $c-accent; }
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    font-family: $font-heading;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $c-bg;
+    background: $c-heading;
+    border-radius: $radius;
+    transition: all $transition;
+
+    &:hover { background: $c-white; }
+  }
+
+  &__btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 22px;
+    font-family: $font-heading;
+    font-size: 0.85rem;
+    color: $c-text-dim;
+    border: 1px solid $c-border-2;
+    border-radius: $radius;
+    transition: all $transition;
+
+    &:hover { color: $c-text; border-color: $c-muted; }
+  }
+}

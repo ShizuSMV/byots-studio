@@ -1,0 +1,261 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba($c-bg, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+  animation: fade-in 0.2s ease;
+}
+
+.modal {
+  background: $c-surface;
+  border: 1px solid $c-border-2;
+  border-radius: $radius-lg;
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 40px;
+  position: relative;
+  animation: slide-up 0.3s $ease;
+
+  &__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $c-text-dim;
+    border-radius: $radius;
+    transition: all $transition;
+
+    &:hover { background: $c-card; color: $c-text; }
+  }
+
+  &__progress {
+    display: flex;
+    align-items: center;
+    margin-bottom: 36px;
+
+    &-step {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid $c-border-2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: $font-heading;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: $c-muted;
+      background: $c-surface;
+      z-index: 1;
+      transition: all $transition;
+      flex-shrink: 0;
+
+      &--active {
+        border-color: $c-accent;
+        color: $c-accent;
+      }
+
+      &--done {
+        background: $c-accent;
+        border-color: $c-accent;
+        color: $c-bg;
+      }
+    }
+
+    &-bar {
+      flex: 1;
+      height: 1px;
+      background: $c-border;
+      margin: 0 -1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    &-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background: $c-accent;
+      transition: width 0.4s $ease;
+    }
+  }
+
+  &__step { animation: fade-in 0.2s ease; }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: $c-heading;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+
+  &__subtitle {
+    font-size: 0.88rem;
+    color: $c-text-sec;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  &__service-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  &__service-card {
+    background: $c-card;
+    border: 1px solid $c-border-2;
+    border-radius: $radius-md;
+    padding: 14px 18px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: all $transition;
+
+    strong {
+      font-family: $font-heading;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: $c-heading;
+    }
+
+    &:hover {
+      border-color: $c-muted;
+      background: $c-surface;
+    }
+
+    &--selected {
+      border-color: $c-accent;
+      background: rgba($c-accent, 0.06);
+
+      strong { color: $c-accent-lt; }
+    }
+  }
+
+  &__service-price { font-size: 0.8rem; color: $c-text-dim; }
+
+  &__service-deposit { font-size: 0.78rem; color: $c-accent; }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid $c-border;
+  }
+
+  &__btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 24px;
+    font-family: $font-heading;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $c-bg;
+    background: $c-heading;
+    border: 1px solid $c-heading;
+    border-radius: $radius;
+    transition: all $transition;
+
+    &:disabled { opacity: 0.35; cursor: not-allowed; }
+    &:not(:disabled):hover { background: $c-white; border-color: $c-white; }
+  }
+
+  &__btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: 11px 20px;
+    font-family: $font-heading;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: $c-text-dim;
+    border: 1px solid $c-border-2;
+    border-radius: $radius;
+    transition: all $transition;
+
+    &:disabled { opacity: 0.35; cursor: not-allowed; }
+    &:not(:disabled):hover { color: $c-text; border-color: $c-muted; }
+  }
+
+  &__spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid rgba($c-bg, 0.3);
+    border-top-color: $c-bg;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  &__summary {
+    background: $c-card;
+    border: 1px solid $c-border-2;
+    border-radius: $radius;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+
+    span { font-size: 0.88rem; color: $c-text-sec; font-family: $font-heading; }
+    span:last-child { color: $c-accent; font-weight: 600; }
+  }
+
+  &__error {
+    background: rgba(180, 60, 60, 0.1);
+    border: 1px solid rgba(180, 60, 60, 0.25);
+    color: #D88;
+    font-size: 0.84rem;
+    padding: 12px 16px;
+    border-radius: $radius;
+    margin-bottom: 14px;
+  }
+
+  &__stripe-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: $c-text-dim;
+    margin-top: 14px;
+  }
+
+  @media (max-width: 560px) {
+    padding: 28px 20px;
+    border-radius: $radius-md;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

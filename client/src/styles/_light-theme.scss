@@ -1,0 +1,497 @@
+// ============================================================
+// THÈME CLAIR — Inspiré VilaThai
+// Crème chaud · Vert forêt · Touches dorées
+// ============================================================
+
+[data-theme="light"] {
+
+  // ——————————————————————————————
+  // BASE
+  // ——————————————————————————————
+  body, & {
+    background-color: #F5EDE0;
+    color: #3D2E18;
+  }
+
+  // ——————————————————————————————
+  // BOUTONS
+  // ——————————————————————————————
+  .btn--green {
+    background: #1E3828;
+    border-color: #1E3828;
+    color: #F5EDE0;
+
+    &:hover:not(:disabled) {
+      background: #2A5038;
+      border-color: #2A5038;
+      box-shadow: 0 8px 24px rgba(#1E3828, 0.3);
+    }
+  }
+
+  .btn--outline {
+    color: #3D2E18;
+    border-color: rgba(#C4943A, 0.4);
+
+    &:hover:not(:disabled) {
+      border-color: #C4943A;
+      color: #1E3828;
+    }
+  }
+
+  .btn--ghost {
+    color: #8B7355;
+
+    &:hover:not(:disabled) {
+      color: #3D2E18;
+    }
+  }
+
+  // ——————————————————————————————
+  // FORMULAIRES
+  // ——————————————————————————————
+  .form-group {
+    label { color: #6B5A3E; }
+
+    input, textarea, select {
+      background: #F5EDE0;
+      border-color: rgba(#C4943A, 0.35);
+      color: #1A1208;
+
+      &::placeholder { color: #B0956A; }
+      &:focus { border-color: #C4943A; }
+      option { background: #EDE2D0; }
+    }
+  }
+
+  // ——————————————————————————————
+  // SECTION HEADERS
+  // ——————————————————————————————
+  .section__eyebrow {
+    color: #C4943A;
+
+    &::before { color: rgba(#C4943A, 0.5); }
+  }
+
+  .section__title { color: #1A1208; }
+
+  .section__subtitle { color: #6B5A3E; }
+
+  // ——————————————————————————————
+  // NAVBAR
+  // ——————————————————————————————
+  .navbar {
+    &--scrolled {
+      background: rgba(#F5EDE0, 0.92);
+      border-bottom-color: rgba(#C4943A, 0.25);
+    }
+
+    &__logo {
+      color: #1A1208;
+
+      strong { color: #C4943A; }
+    }
+
+    &__logo-dot {
+      background: #1E3828;
+      box-shadow: 0 0 8px rgba(#1E3828, 0.5);
+    }
+
+    &__links li button {
+      color: #6B5A3E;
+
+      &:hover { color: #1A1208; }
+    }
+
+    &__theme-toggle {
+      color: #6B5A3E;
+      border-color: rgba(#C4943A, 0.3);
+
+      &:hover {
+        background: rgba(#C4943A, 0.1);
+        color: #C4943A;
+      }
+    }
+
+    &__links--open {
+      background: rgba(#F5EDE0, 0.97);
+      border-bottom-color: rgba(#C4943A, 0.2);
+
+      li button { border-bottom-color: rgba(#C4943A, 0.15); }
+    }
+
+    &__burger span { background: #3D2E18; }
+  }
+
+  // ——————————————————————————————
+  // HERO
+  // ——————————————————————————————
+  .hero {
+    background: #F5EDE0;
+
+    // Grille couleur or doux au lieu de béton
+    &__grid {
+      background-image:
+        linear-gradient(rgba(#C4943A, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(#C4943A, 0.08) 1px, transparent 1px);
+    }
+
+    &__eyebrow { color: #C4943A; }
+
+    &__dot {
+      background: #1E3828;
+      box-shadow: 0 0 10px rgba(#1E3828, 0.5);
+    }
+
+    &__title-line { color: #1A1208; }
+
+    &__title-line--accent {
+      color: #1E3828;
+      font-style: italic;
+    }
+
+    &__subtitle { color: #6B5A3E; }
+
+    &__stat-number { color: #1A1208; }
+    &__stat-label { color: #9B8060; }
+    &__stat-divider { background: rgba(#C4943A, 0.3); }
+
+    &__scroll {
+      &-line { background: linear-gradient(#1E3828, transparent); }
+      span { color: #9B8060; }
+    }
+
+    // Plantes restent vertes — parfaitement cohérent
+    &__plant--right { opacity: 0.85; }
+    &__plant--left { opacity: 0.6; }
+  }
+
+  // ——————————————————————————————
+  // PORTFOLIO
+  // ——————————————————————————————
+  .portfolio {
+    background: #EDE2D0;
+
+    &::before {
+      background: linear-gradient(90deg, transparent, rgba(#C4943A, 0.4), transparent);
+    }
+  }
+
+  .project-card {
+    background: #F5EDE0;
+    border-color: rgba(#C4943A, 0.2);
+
+    &:hover:not(.project-card--placeholder) {
+      border-color: #C4943A;
+      box-shadow: 0 16px 40px rgba(#1A1208, 0.12);
+    }
+
+    &--placeholder {
+      border-color: rgba(#C4943A, 0.2);
+
+      &:hover { border-color: #C4943A; }
+    }
+
+    &__category {
+      background: rgba(#F5EDE0, 0.85);
+      border-color: rgba(#C4943A, 0.3);
+      color: #6B5A3E;
+    }
+
+    &__plus { color: rgba(#C4943A, 0.5); }
+
+    &__tag {
+      color: #1E3828;
+      background: rgba(#1E3828, 0.08);
+      border-color: rgba(#1E3828, 0.15);
+    }
+
+    &__name { color: #1A1208; }
+    &__desc { color: #6B5A3E; }
+
+    &__link {
+      color: #C4943A;
+
+      &:hover { color: #1E3828; }
+    }
+  }
+
+  // ——————————————————————————————
+  // SERVICES
+  // ——————————————————————————————
+  .services {
+    background: #F5EDE0;
+
+    &__plant { opacity: 0.5; }
+  }
+
+  .service-card {
+    background: #EDE2D0;
+    border-color: rgba(#C4943A, 0.2);
+
+    &:hover {
+      border-color: #C4943A;
+      box-shadow: 0 8px 32px rgba(#1A1208, 0.1);
+    }
+
+    &--featured {
+      background: #1E3828;
+      border-color: rgba(#C4943A, 0.5);
+      box-shadow: 0 0 0 1px rgba(#C4943A, 0.3), 0 16px 48px rgba(#1A1208, 0.2);
+
+      .service-card__name,
+      .service-card__tagline,
+      .service-card__price-amount,
+      .service-card__price-text,
+      .service-card__features li { color: #F5EDE0; }
+
+      .service-card__price-from { color: rgba(#F5EDE0, 0.6); }
+      .service-card__features li svg { color: #C4943A; }
+
+      .btn--green {
+        background: #C4943A;
+        border-color: #C4943A;
+        color: #1A1208;
+
+        &:hover:not(:disabled) {
+          background: #D4A44A;
+          border-color: #D4A44A;
+          box-shadow: 0 8px 24px rgba(#C4943A, 0.4);
+        }
+      }
+    }
+
+    &__badge {
+      background: #C4943A;
+      color: #1A1208;
+    }
+
+    &__icon {
+      color: #1E3828;
+      background: rgba(#1E3828, 0.08);
+    }
+
+    &__name { color: #1A1208; }
+    &__tagline { color: #8B7355; }
+
+    &__price {
+      border-color: rgba(#C4943A, 0.25);
+
+      &-from { color: #9B8060; }
+      &-amount, &-text { color: #1A1208; }
+    }
+
+    &__features li {
+      color: #6B5A3E;
+
+      svg { color: #1E3828; }
+    }
+
+    .btn--outline {
+      border-color: rgba(#C4943A, 0.4);
+      color: #1E3828;
+
+      &:hover:not(:disabled) {
+        border-color: #C4943A;
+        background: rgba(#C4943A, 0.06);
+      }
+    }
+  }
+
+  // ——————————————————————————————
+  // PROCESSUS
+  // ——————————————————————————————
+  .process {
+    background: #EDE2D0;
+
+    .section__header--light {
+      .section__title { color: #1A1208; }
+      .section__subtitle { color: #6B5A3E; }
+    }
+  }
+
+  .process-step {
+    background: #F5EDE0;
+    border-color: rgba(#C4943A, 0.2);
+
+    &:hover {
+      background: #EDE2D0;
+      border-color: #C4943A;
+
+      .process-step__number { color: #C4943A; }
+    }
+
+    &__number { color: rgba(#C4943A, 0.2); }
+
+    &__icon {
+      color: #1E3828;
+      background: rgba(#1E3828, 0.08);
+    }
+
+    &__title { color: #1A1208; }
+    &__desc { color: #6B5A3E; }
+  }
+
+  // ——————————————————————————————
+  // CONTACT
+  // ——————————————————————————————
+  .contact {
+    background: #F5EDE0;
+  }
+
+  .contact__text { color: #6B5A3E; }
+
+  .contact__details li {
+    color: #6B5A3E;
+
+    svg { color: #1E3828; }
+    a:hover { color: #C4943A; }
+  }
+
+  .contact__form {
+    background: #EDE2D0;
+    border-color: rgba(#C4943A, 0.25);
+  }
+
+  .contact__success svg circle { stroke: #1E3828; }
+  .contact__success svg path { stroke: #1E3828; }
+  .contact__success p { color: #6B5A3E; }
+
+  // ——————————————————————————————
+  // FOOTER
+  // ——————————————————————————————
+  .footer {
+    background: #1E3828;
+    border-top-color: rgba(#C4943A, 0.3);
+
+    &__logo { color: #F5EDE0; }
+    &__tagline { color: rgba(#F5EDE0, 0.55); }
+
+    &__nav-col {
+      h4 { color: rgba(#F5EDE0, 0.4); }
+
+      li { color: rgba(#F5EDE0, 0.65); }
+
+      button, a {
+        &:hover { color: #C4943A; }
+      }
+    }
+
+    &__bottom {
+      border-top-color: rgba(#C4943A, 0.15);
+
+      p { color: rgba(#F5EDE0, 0.35); }
+    }
+  }
+
+  // ——————————————————————————————
+  // MODAL
+  // ——————————————————————————————
+  .modal-overlay {
+    background: rgba(#3D2E18, 0.7);
+  }
+
+  .modal {
+    background: #F5EDE0;
+    border-color: rgba(#C4943A, 0.3);
+
+    &__close {
+      color: #9B8060;
+
+      &:hover {
+        background: rgba(#C4943A, 0.1);
+        color: #3D2E18;
+      }
+    }
+
+    &__progress-step {
+      border-color: rgba(#C4943A, 0.3);
+      color: #9B8060;
+      background: #F5EDE0;
+
+      &--active {
+        border-color: #C4943A;
+        color: #C4943A;
+        background: rgba(#C4943A, 0.08);
+      }
+
+      &--done {
+        background: #1E3828;
+        border-color: #1E3828;
+        color: #F5EDE0;
+      }
+    }
+
+    &__progress-bar { background: rgba(#C4943A, 0.2); }
+    &__progress-fill { background: #C4943A; }
+
+    &__title { color: #1A1208; }
+    &__subtitle { color: #6B5A3E; }
+
+    &__service-card {
+      background: #EDE2D0;
+      border-color: rgba(#C4943A, 0.2);
+
+      strong { color: #1A1208; }
+
+      &:hover {
+        border-color: #C4943A;
+        background: #E8D8C0;
+      }
+
+      &--selected {
+        border-color: #1E3828;
+        background: rgba(#1E3828, 0.06);
+
+        strong { color: #1E3828; }
+      }
+    }
+
+    &__service-price { color: #9B8060; }
+    &__service-deposit { color: #C4943A; }
+
+    &__actions {
+      border-top-color: rgba(#C4943A, 0.2);
+    }
+
+    &__summary {
+      background: #EDE2D0;
+      border-color: rgba(#C4943A, 0.4);
+
+      span { color: #3D2E18; }
+      span:last-child { color: #C4943A; }
+    }
+
+    &__stripe-note { color: #9B8060; }
+  }
+
+  // ——————————————————————————————
+  // PAGES SUCCESS / CANCEL
+  // ——————————————————————————————
+  .result-page {
+    background: #F5EDE0;
+  }
+
+  .result-page__card {
+    background: #EDE2D0;
+    border-color: rgba(#C4943A, 0.25);
+
+    h1 { color: #1A1208; }
+    p { color: #6B5A3E; }
+
+    &--success { border-color: rgba(#1E3828, 0.3); }
+  }
+
+  .result-page__next {
+    background: #F5EDE0;
+    border-color: rgba(#C4943A, 0.2);
+
+    h3 { color: #1A1208; }
+    li { color: #6B5A3E; }
+    li::marker { color: #C4943A; }
+  }
+
+  .result-page__ref code {
+    background: #EDE2D0;
+    color: #6B5A3E;
+  }
+}

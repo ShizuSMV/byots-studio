@@ -1,0 +1,43 @@
+// ————————————————————————————
+// Palette — Pastel & Sombre
+// ————————————————————————————
+
+$c-bg:        #0B0A12;   // noir profond, sous-ton violet
+$c-surface:   #110F1A;   // violet très sombre
+$c-card:      #181626;   // violet sombre
+$c-border:    #221E34;   // bordure pastel subtile
+$c-border-2:  #302C4A;   // bordure pastel visible
+$c-muted:     #524E6E;   // muted lilas
+$c-text-dim:  #726E94;   // texte dim pastel
+$c-text-sec:  #A09EC4;   // texte secondaire lavande
+$c-text:      #C4C2DC;   // texte principal lilas clair
+$c-heading:   #EDE8F8;   // heading blanc-lavande
+$c-white:     #F8F5FF;   // blanc pastel
+
+// Accent lavande pastel
+$c-accent:    #B4A4F2;
+$c-accent-dk: #8C7CCC;
+$c-accent-lt: #D0C8FF;
+
+// ————————————————————————————
+// Typography
+// ————————————————————————————
+$font-heading: 'Space Grotesk', sans-serif;
+$font-body:    'Inter', sans-serif;
+
+// ————————————————————————————
+// Spacing
+// ————————————————————————————
+$section-py:  clamp(80px, 10vw, 140px);
+$inner-px:    clamp(24px, 5vw, 80px);
+$inner-max:   1280px;
+
+// ————————————————————————————
+// Misc
+// ————————————————————————————
+$radius:      3px;
+$radius-md:   6px;
+$radius-lg:   12px;
+$ease:        cubic-bezier(0.4, 0, 0.2, 1);
+$transition:  0.25s $ease;
+$transition-slow: 0.55s $ease;
