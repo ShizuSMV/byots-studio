@@ -10,7 +10,7 @@ const PROJECTS = [
     description: 'Site vitrine pour un restaurant gastronomique avec menu interactif, réservation en ligne et galerie photo.',
     gradient: 'linear-gradient(135deg, #1A1A2E 0%, #2E2A4A 50%, #7A6AAE 100%)',
     accent: '#A898E0',
-    url: null,
+    image: '/projects/vite-et-gourmand.jpg',
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const PROJECTS = [
     description: 'Identité visuelle digitale et site pour un restaurant thaïlandais, avec carte en ligne et ambiance immersive.',
     gradient: 'linear-gradient(135deg, #0E1A2A 0%, #1A3050 50%, #6AAACE 100%)',
     accent: '#A0C8F0',
-    url: null,
+    image: '/projects/vilathai-lounge.jpg',
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const PROJECTS = [
     description: 'Plateforme web pour une association culturelle : agenda, publications, formulaires d\'adhésion et back-office.',
     gradient: 'linear-gradient(135deg, #101E1A 0%, #1A3430 50%, #4A9480 100%)',
     accent: '#80C4B0',
-    url: null,
+    image: '/projects/odar.jpg',
   },
   {
     id: 4,
@@ -40,12 +40,55 @@ const PROJECTS = [
     description: 'Ce slot pourrait être votre projet. Parlons-en et construisons quelque chose de mémorable ensemble.',
     gradient: 'linear-gradient(135deg, #1B1B19 0%, #2E2E2C 100%)',
     accent: '#4A7858',
-    url: null,
+    image: null,
     placeholder: true,
   },
 ]
 
-function ProjectCard({ project, index }) {
+function Lightbox({ project, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [])
+
+  return (
+    <div className="lightbox" onClick={onClose}>
+      <button className="lightbox__close" onClick={onClose} aria-label="Fermer">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
+      </button>
+      <div className="lightbox__panel" onClick={(e) => e.stopPropagation()}>
+        <div className="lightbox__img-wrap">
+          {project.image
+            ? <img src={project.image} alt={project.name} className="lightbox__img" />
+            : (
+              <div className="lightbox__placeholder" style={{ background: project.gradient }}>
+                <span>Image bientôt disponible</span>
+              </div>
+            )
+          }
+        </div>
+        <div className="lightbox__info">
+          <div className="lightbox__tags">
+            {project.tags.map(t => (
+              <span key={t} className="project-card__tag">{t}</span>
+            ))}
+          </div>
+          <h3 className="lightbox__name">{project.name}</h3>
+          <p className="lightbox__desc">{project.description}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ProjectCard({ project, index, onOpen }) {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
 
@@ -63,14 +106,22 @@ function ProjectCard({ project, index }) {
       ref={ref}
       className={`project-card${visible ? ' project-card--visible' : ''}${project.placeholder ? ' project-card--placeholder' : ''}`}
       style={{ '--delay': `${index * 120}ms`, '--accent': project.accent }}
+      onClick={() => !project.placeholder && onOpen(project)}
+      role={project.placeholder ? undefined : 'button'}
+      tabIndex={project.placeholder ? undefined : 0}
+      onKeyDown={(e) => { if (!project.placeholder && e.key === 'Enter') onOpen(project) }}
     >
-      <div
-        className="project-card__thumb"
-        style={{ background: project.gradient }}
-      >
+      <div className="project-card__thumb" style={{ background: project.gradient }}>
         <div className="project-card__thumb-inner">
           {!project.placeholder && (
-            <span className="project-card__category">{project.category}</span>
+            <>
+              <span className="project-card__category">{project.category}</span>
+              <div className="project-card__zoom">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M11 3h4v4M7 15H3v-4M3 3l5 5M15 15l-5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </>
           )}
           {project.placeholder && (
             <div className="project-card__plus">
@@ -90,14 +141,6 @@ function ProjectCard({ project, index }) {
         </div>
         <h3 className="project-card__name">{project.name}</h3>
         <p className="project-card__desc">{project.description}</p>
-        {!project.placeholder && project.url && (
-          <a href={project.url} target="_blank" rel="noopener noreferrer" className="project-card__link">
-            Voir le site
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M2 12L12 2M12 2H6M12 2v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </a>
-        )}
       </div>
     </article>
   )
@@ -107,6 +150,7 @@ export default function Portfolio() {
   const trackRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [headerRef, headerVisible] = useInView()
+  const [lightboxProject, setLightboxProject] = useState(null)
 
   const goTo = (index) => {
     const track = trackRef.current
@@ -122,19 +166,16 @@ export default function Portfolio() {
   useEffect(() => {
     const track = trackRef.current
     if (!track) return
-
     const onScroll = () => {
       const cards = Array.from(track.children)
       const trackLeft = track.getBoundingClientRect().left
-      let closest = 0
-      let minDist = Infinity
+      let closest = 0, minDist = Infinity
       cards.forEach((card, i) => {
         const dist = Math.abs(card.getBoundingClientRect().left - trackLeft)
         if (dist < minDist) { minDist = dist; closest = i }
       })
       setActiveIndex(closest)
     }
-
     track.addEventListener('scroll', onScroll, { passive: true })
     return () => track.removeEventListener('scroll', onScroll)
   }, [])
@@ -143,24 +184,13 @@ export default function Portfolio() {
     <section id="portfolio" className="portfolio">
       <div className="section__inner">
         <div className="section__header" ref={headerRef}>
-          <span
-            className={`section__eyebrow${headerVisible ? ' is-visible' : ''}`}
-            data-slide="up"
-          >
+          <span className={`section__eyebrow${headerVisible ? ' is-visible' : ''}`} data-slide="up">
             Réalisations
           </span>
-          <h2
-            className={`section__title${headerVisible ? ' is-visible' : ''}`}
-            data-slide="up"
-            data-delay="1"
-          >
+          <h2 className={`section__title${headerVisible ? ' is-visible' : ''}`} data-slide="up" data-delay="1">
             Mes projets récents
           </h2>
-          <p
-            className={`section__subtitle${headerVisible ? ' is-visible' : ''}`}
-            data-slide="up"
-            data-delay="2"
-          >
+          <p className={`section__subtitle${headerVisible ? ' is-visible' : ''}`} data-slide="up" data-delay="2">
             Chaque projet est unique — conçu et développé sur mesure pour répondre
             aux besoins spécifiques de chaque client.
           </p>
@@ -169,7 +199,7 @@ export default function Portfolio() {
 
       <div className="portfolio__track" ref={trackRef}>
         {PROJECTS.map((project, i) => (
-          <ProjectCard key={project.id} project={project} index={i} />
+          <ProjectCard key={project.id} project={project} index={i} onOpen={setLightboxProject} />
         ))}
       </div>
 
@@ -186,22 +216,12 @@ export default function Portfolio() {
             ))}
           </div>
           <div className="portfolio__nav-buttons">
-            <button
-              className="portfolio__nav-btn"
-              onClick={() => goTo(Math.max(0, activeIndex - 1))}
-              disabled={activeIndex === 0}
-              aria-label="Projet précédent"
-            >
+            <button className="portfolio__nav-btn" onClick={() => goTo(Math.max(0, activeIndex - 1))} disabled={activeIndex === 0} aria-label="Projet précédent">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
-            <button
-              className="portfolio__nav-btn"
-              onClick={() => goTo(Math.min(PROJECTS.length - 1, activeIndex + 1))}
-              disabled={activeIndex === PROJECTS.length - 1}
-              aria-label="Projet suivant"
-            >
+            <button className="portfolio__nav-btn" onClick={() => goTo(Math.min(PROJECTS.length - 1, activeIndex + 1))} disabled={activeIndex === PROJECTS.length - 1} aria-label="Projet suivant">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -209,6 +229,10 @@ export default function Portfolio() {
           </div>
         </div>
       </div>
+
+      {lightboxProject && (
+        <Lightbox project={lightboxProject} onClose={() => setLightboxProject(null)} />
+      )}
     </section>
   )
 }
