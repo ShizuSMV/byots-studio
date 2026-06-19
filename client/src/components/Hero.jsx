@@ -24,7 +24,8 @@ export default function Hero({ onRequestClick, loaded }) {
         </div>
 
         <div className="hero__heading-wrap">
-          <div className="hero__title-glass">
+          <div className="hero__title-wrap">
+            <div className="hero__title-circle" />
             <h1 className="hero__title">
               <span className="hero__title-row">Création</span>
               <span className="hero__title-row hero__title-row--indent">

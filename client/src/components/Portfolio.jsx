@@ -88,7 +88,7 @@ function Lightbox({ project, onClose }) {
   )
 }
 
-function ProjectCard({ project, index, onOpen }) {
+function ProjectCard({ project, index, isActive, onOpen }) {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
 
@@ -104,7 +104,12 @@ function ProjectCard({ project, index, onOpen }) {
   return (
     <article
       ref={ref}
-      className={`project-card${visible ? ' project-card--visible' : ''}${project.placeholder ? ' project-card--placeholder' : ''}`}
+      className={[
+        'project-card',
+        visible   ? 'project-card--visible'     : '',
+        isActive  ? 'project-card--active'      : '',
+        project.placeholder ? 'project-card--placeholder' : '',
+      ].filter(Boolean).join(' ')}
       style={{ '--delay': `${index * 120}ms`, '--accent': project.accent }}
       onClick={() => !project.placeholder && onOpen(project)}
       role={project.placeholder ? undefined : 'button'}
@@ -152,17 +157,99 @@ export default function Portfolio() {
   const [headerRef, headerVisible] = useInView()
   const [lightboxProject, setLightboxProject] = useState(null)
 
+  // Drag state
+  const isDragging = useRef(false)
+  const didDrag    = useRef(false)
+  const dragStart  = useRef({ x: 0, scrollLeft: 0 })
+  const velocity   = useRef(0)
+  const prevX      = useRef(0)
+  const rafId      = useRef(null)
+
+  const snapToNearest = () => {
+    const track = trackRef.current
+    if (!track) return
+    const cards = Array.from(track.children)
+    const pad = parseInt(getComputedStyle(track).paddingLeft) || 0
+    let closest = 0, minDist = Infinity
+    cards.forEach((card, i) => {
+      const dist = Math.abs(card.offsetLeft - pad - track.scrollLeft)
+      if (dist < minDist) { minDist = dist; closest = i }
+    })
+    track.style.scrollSnapType = 'x mandatory'
+    track.scrollTo({ left: cards[closest].offsetLeft - pad, behavior: 'smooth' })
+    setActiveIndex(closest)
+  }
+
   const goTo = (index) => {
     const track = trackRef.current
     if (!track) return
     const cards = Array.from(track.children)
     const card = cards[index]
     if (!card) return
-    const paddingLeft = parseInt(getComputedStyle(track).paddingLeft) || 0
-    track.scrollTo({ left: card.offsetLeft - paddingLeft, behavior: 'smooth' })
+    const pad = parseInt(getComputedStyle(track).paddingLeft) || 0
+    track.scrollTo({ left: card.offsetLeft - pad, behavior: 'smooth' })
     setActiveIndex(index)
   }
 
+  // Drag + momentum (souris desktop uniquement)
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const onPointerDown = (e) => {
+      if (e.pointerType === 'touch') return
+      isDragging.current = true
+      didDrag.current    = false
+      dragStart.current  = { x: e.clientX, scrollLeft: track.scrollLeft }
+      prevX.current      = e.clientX
+      velocity.current   = 0
+      track.style.scrollSnapType = 'none'
+      track.style.cursor = 'grabbing'
+      track.setPointerCapture(e.pointerId)
+      if (rafId.current) cancelAnimationFrame(rafId.current)
+    }
+
+    const onPointerMove = (e) => {
+      if (!isDragging.current) return
+      const dx = e.clientX - dragStart.current.x
+      if (Math.abs(dx) > 5) didDrag.current = true
+      track.scrollLeft = dragStart.current.scrollLeft - dx
+      velocity.current = prevX.current - e.clientX
+      prevX.current    = e.clientX
+    }
+
+    const applyMomentum = () => {
+      velocity.current *= 0.88
+      track.scrollLeft += velocity.current
+      if (Math.abs(velocity.current) > 0.6) {
+        rafId.current = requestAnimationFrame(applyMomentum)
+      } else {
+        snapToNearest()
+      }
+    }
+
+    const onPointerUp = () => {
+      if (!isDragging.current) return
+      isDragging.current = false
+      track.style.cursor = 'grab'
+      rafId.current = requestAnimationFrame(applyMomentum)
+    }
+
+    track.addEventListener('pointerdown', onPointerDown)
+    track.addEventListener('pointermove', onPointerMove)
+    track.addEventListener('pointerup',   onPointerUp)
+    track.addEventListener('pointercancel', onPointerUp)
+
+    return () => {
+      track.removeEventListener('pointerdown', onPointerDown)
+      track.removeEventListener('pointermove', onPointerMove)
+      track.removeEventListener('pointerup',   onPointerUp)
+      track.removeEventListener('pointercancel', onPointerUp)
+      if (rafId.current) cancelAnimationFrame(rafId.current)
+    }
+  }, [])
+
+  // Sync dots on native scroll (touch)
   useEffect(() => {
     const track = trackRef.current
     if (!track) return
@@ -179,6 +266,11 @@ export default function Portfolio() {
     track.addEventListener('scroll', onScroll, { passive: true })
     return () => track.removeEventListener('scroll', onScroll)
   }, [])
+
+  const handleOpen = (project) => {
+    if (didDrag.current) return
+    setLightboxProject(project)
+  }
 
   return (
     <section id="portfolio" className="portfolio">
@@ -199,7 +291,7 @@ export default function Portfolio() {
 
       <div className="portfolio__track" ref={trackRef}>
         {PROJECTS.map((project, i) => (
-          <ProjectCard key={project.id} project={project} index={i} onOpen={setLightboxProject} />
+          <ProjectCard key={project.id} project={project} index={i} isActive={activeIndex === i} onOpen={handleOpen} />
         ))}
       </div>
 

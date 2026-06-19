@@ -1,12 +1,11 @@
 import { Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
-import Navbar from './components/Navbar'
+import Layout from './components/Layout'
 import Hero from './components/Hero'
 import Portfolio from './components/Portfolio'
 import Services from './components/Services'
 import Process from './components/Process'
 import Contact from './components/Contact'
-import Footer from './components/Footer'
 import RequestModal from './components/RequestModal'
 import LoadingScreen from './components/LoadingScreen'
 import Success from './pages/Success'
@@ -22,23 +21,21 @@ function HomePage({ loaded }) {
   }
 
   return (
-    <>
-      <Navbar onRequestClick={() => openModal()} />
+    <Layout onRequestClick={openModal}>
       <main>
-        <Hero onRequestClick={() => openModal()} loaded={loaded} />
+        <Hero onRequestClick={openModal} loaded={loaded} />
         <Portfolio />
         <Services onServiceClick={openModal} />
         <Process />
         <Contact />
       </main>
-      <Footer onRequestClick={() => openModal()} />
       {modalOpen && (
         <RequestModal
           preselectedService={preselectedService}
           onClose={() => setModalOpen(false)}
         />
       )}
-    </>
+    </Layout>
   )
 }
 
