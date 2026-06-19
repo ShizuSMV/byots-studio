@@ -122,7 +122,7 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.12),
       0 0 80px rgba(255, 255, 255, 0.04),
       0 40px 60px rgba(0, 0, 0, 0.5);
-    filter: blur(40px);
+    filter: blur(40px) drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
     pointer-events: none;
     z-index: 0;
   }
