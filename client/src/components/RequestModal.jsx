@@ -27,14 +27,6 @@ export default function RequestModal({ onClose, preselectedService }) {
     return () => { document.body.style.overflow = '' }
   }, [])
 
-  useEffect(() => {
-    if (step === 3) {
-      document.body.classList.add('panier-mode')
-    } else {
-      document.body.classList.remove('panier-mode')
-    }
-    return () => document.body.classList.remove('panier-mode')
-  }, [step])
 
   const set = (field, value) => setForm(f => ({ ...f, [field]: value }))
 
@@ -71,16 +63,6 @@ export default function RequestModal({ onClose, preselectedService }) {
   }
 
   const selectedService = SERVICES.find(s => s.id === form.serviceType)
-
-  if (step === 3) {
-    return (
-      <button className="modal__close modal__close--floating" onClick={onClose} aria-label="Fermer">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
-        </svg>
-      </button>
-    )
-  }
 
   return (
     <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>

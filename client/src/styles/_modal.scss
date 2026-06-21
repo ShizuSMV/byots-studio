@@ -38,28 +38,6 @@
     transition: all $transition;
 
     &:hover { background: $c-card; color: $c-text; }
-
-    &--floating {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 300;
-      background: rgba($c-surface, 0.9);
-      border: 1px solid $c-border-2;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      width: 40px;
-      height: 40px;
-      border-radius: $radius-md;
-      color: $c-text-dim;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all $transition;
-
-      &:hover { background: $c-card; color: $c-heading; }
-    }
   }
 
   &__progress {
