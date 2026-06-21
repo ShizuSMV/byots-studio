@@ -201,6 +201,22 @@
       }
 
       li:last-child button { border-bottom: none; }
+
+      .navbar__links-close {
+        display: flex;
+        justify-content: flex-end;
+        border-bottom: none !important;
+
+        button {
+          padding: 8px;
+          width: auto;
+          border-bottom: none;
+          color: $c-text-sec;
+          transition: color $transition;
+
+          &:hover { color: $c-heading; }
+        }
+      }
     }
 
     &__cta { display: none; }

@@ -14,6 +14,7 @@ export default function Hero({ onRequestClick, loaded }) {
       <div className="hero__orb hero__orb--2" />
       <div className="hero__orb hero__orb--3" />
       <div className="hero__title-circle" />
+      <div className="hero__title-circle-border" />
 
       <div className="hero__inner">
         <div className="hero__top">
@@ -27,11 +28,8 @@ export default function Hero({ onRequestClick, loaded }) {
         <div className="hero__heading-wrap">
           <div className="hero__title-wrap">
             <h1 className="hero__title">
-              <span className="hero__title-row">Création</span>
-              <span className="hero__title-row hero__title-row--indent">
-                web <em>sur</em>
-              </span>
-              <span className="hero__title-row hero__title-row--mesure">mesure</span>
+              <span className="hero__title-row">Création <em>web</em></span>
+              <span className="hero__title-row hero__title-row--indent">sur mesure</span>
             </h1>
           </div>
           <div className="hero__side-text">

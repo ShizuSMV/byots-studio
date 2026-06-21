@@ -71,8 +71,9 @@
     font-weight: 400;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: $c-text-dim;
+    color: $c-white;
     position: relative;
+    top: -20px;
   }
 
   &__dot {
@@ -80,23 +81,25 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: $c-accent;
+    background: #5AAE7A;
     animation: blink 3s ease-in-out infinite;
   }
 
   &__year {
-    font-size: 0.78rem;
-    color: $c-muted;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
     letter-spacing: 0.08em;
+    margin-left: auto;
+    text-align: right;
   }
 
   &__heading-wrap {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: space-between;
     gap: 40px;
     flex: 1;
-    flex-direction: column;
   }
 
   &__title-wrap {
@@ -104,20 +107,39 @@
     text-align: center;
     position: relative;
     right: 30px;
+    margin-top: 40px;
   }
 
-  &__title-circle {
+  &__title-circle-border {
     position: absolute;
-    width: clamp(320px, 50vw, 580px);
+    width: clamp(260px, 38vw, 440px);
     aspect-ratio: 1 / 1;
     top: 32%;
     left: 17%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 50%, transparent 75%);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &__title-circle {
+    position: absolute;
+    width: clamp(260px, 38vw, 440px);
+    aspect-ratio: 1 / 1;
+    top: 32%;
+    left: 17%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(140, 100, 230, 0.6) 0%, rgba(255, 255, 255, 0.08) 50%, transparent 75%);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.12),
       0 0 80px rgba(255, 255, 255, 0.04),
@@ -130,7 +152,7 @@
   &__title {
     font-family: $font-heading;
     font-weight: 700;
-    font-size: clamp(4rem, 11vw, 10rem);
+    font-size: clamp(2.8rem, 7.5vw, 7rem);
     line-height: 0.95;
     letter-spacing: -0.04em;
     color: $c-heading;
@@ -141,18 +163,13 @@
     &-row {
       display: block;
 
-      &--indent {
-        margin-left: 70px;
-
-        em {
-          font-style: italic;
-          font-weight: 300;
-          color: $c-accent;
-        }
+      em {
+        font-style: normal;
+        color: $c-accent;
       }
 
-      &--mesure {
-        margin-left: 15px;
+      &--indent {
+        margin-left: 40px;
       }
     }
   }
@@ -164,7 +181,8 @@
     margin-top: 30px;
 
     p {
-      font-size: 0.9rem;
+      font-size: 1.15rem;
+      font-weight: 700;
       line-height: 1.75;
       color: $c-text-sec;
       margin-top: 16px;
@@ -293,7 +311,7 @@
 
     &__side-text { max-width: 100%; }
 
-    &__title { font-size: clamp(3.5rem, 14vw, 7rem); }
+    &__title { font-size: clamp(2.8rem, 12vw, 6rem); }
   }
 
   @media (max-width: 600px) {

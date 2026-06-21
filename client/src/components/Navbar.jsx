@@ -46,6 +46,13 @@ export default function Navbar({ onRequestClick }) {
         </button>
 
         <ul className={`navbar__links${menuOpen ? ' navbar__links--open' : ''}`}>
+          <li className="navbar__links-close">
+            <button onClick={() => setMenuOpen(false)} aria-label="Fermer le menu">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </button>
+          </li>
           {NAV_LINKS.map(([id, label]) => (
             <li key={id}>
               <button
