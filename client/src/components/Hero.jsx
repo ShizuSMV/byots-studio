@@ -15,6 +15,8 @@ export default function Hero({ onRequestClick, loaded }) {
       <div className="hero__orb hero__orb--3" />
       <div className="hero__title-circle" />
       <div className="hero__title-circle-border" />
+      <div className="hero__side-circle" />
+      <div className="hero__side-circle-border" />
 
       <div className="hero__inner">
         <div className="hero__top">
@@ -38,6 +40,8 @@ export default function Hero({ onRequestClick, loaded }) {
             </p>
           </div>
         </div>
+
+        <div className="hero__bar" />
 
         <div className="hero__bottom">
           <div className="hero__stats">

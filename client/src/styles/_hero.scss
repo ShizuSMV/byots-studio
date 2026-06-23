@@ -22,11 +22,11 @@
     }
 
     &--2 {
-      width: 500px;
-      height: 500px;
+      width: 410px;
+      height: 400px;
       bottom: 60px;
-      right: -60px;
-      background: radial-gradient(circle, rgba($c-accent, 0.35) 0%, rgba($c-accent, 0.1) 45%, transparent 68%);
+      right: -13px;
+      background: radial-gradient(circle, rgba(180, 164, 242, 0.35) 0%, rgba(180, 164, 242, 0.1) 45%, transparent 68%);
       filter: blur(50px);
       animation: orb-drift-2 22s ease-in-out infinite alternate;
     }
@@ -110,6 +110,44 @@
     margin-top: 40px;
   }
 
+  &__side-circle {
+    position: absolute;
+    width: clamp(180px, 26vw, 320px);
+    aspect-ratio: 1 / 1;
+    top: 63%;
+    right: -15%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(140, 100, 230, 0.6) 0%, rgba(255, 255, 255, 0.08) 50%, transparent 75%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 40px 60px rgba(0, 0, 0, 0.5);
+    filter: blur(40px) drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__side-circle-border {
+    position: absolute;
+    width: clamp(180px, 26vw, 320px);
+    aspect-ratio: 1 / 1;
+    top: 63%;
+    right: -15%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid transparent;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+    z-index: 1;
+  }
+
   &__title-circle-border {
     position: absolute;
     width: clamp(260px, 38vw, 440px);
@@ -121,7 +159,7 @@
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(0, 0, 0, 0.9);
+    border: 1px solid transparent;
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.15),
       inset 0 -1px 0 rgba(255, 255, 255, 0.05);
@@ -189,13 +227,23 @@
     }
   }
 
+  &__bar {
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, transparent, #B4A4F2, transparent);
+    position: absolute;
+    left: -21%;
+    top: 40%;
+    margin-bottom: 0;
+    pointer-events: none;
+  }
+
   &__bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 32px;
     padding-top: 40px;
-    border-top: 1px solid $c-border;
     flex-wrap: wrap;
   }
 

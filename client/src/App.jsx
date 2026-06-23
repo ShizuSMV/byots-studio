@@ -21,7 +21,7 @@ function HomePage({ loaded }) {
   }
 
   return (
-    <Layout onRequestClick={openModal}>
+    <Layout onRequestClick={openModal} isPanier={modalOpen} onPanierClose={() => setModalOpen(false)}>
       <main>
         <Hero onRequestClick={openModal} loaded={loaded} />
         <Portfolio />

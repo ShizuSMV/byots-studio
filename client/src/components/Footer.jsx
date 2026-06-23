@@ -10,7 +10,7 @@ export default function Footer({ onRequestClick }) {
         <div className="footer__hero">
           <div className="footer__hero-left">
             <div className="footer__wordmark">
-              <span className="footer__wordmark-by">By</span> OT's
+              <span className="footer__wordmark-by">By</span> OT's Studio
             </div>
             <p className="footer__tagline">
               Création web sur mesure.<br />
@@ -69,7 +69,7 @@ export default function Footer({ onRequestClick }) {
 
         {/* Bottom bar */}
         <div className="footer__bottom">
-          <p>© {year} By OT's — Tous droits réservés</p>
+          <p>© {year} By OT's Studio — Tous droits réservés</p>
           <p className="footer__bottom-right">Fait avec soin en France 🇫🇷</p>
         </div>
 

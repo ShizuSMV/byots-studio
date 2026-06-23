@@ -203,7 +203,24 @@
 
     &__cta { display: none; }
     &__burger { display: flex; }
+
+    &__panier-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      padding: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: $c-text-sec;
+      transition: color $transition;
+
+      &:hover { color: $c-heading; }
+    }
   }
+
+  &__panier-close { display: none; }
 }
 
 @keyframes logo-pulse {

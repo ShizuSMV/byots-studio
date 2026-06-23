@@ -7,7 +7,7 @@ const NAV_LINKS = [
   ['contact', 'Contact'],
 ]
 
-export default function Header({ onRequestClick }) {
+export default function Header({ onRequestClick, isPanier, onPanierClose }) {
   const [scrolled, setScrolled]   = useState(false)
   const [menuOpen, setMenuOpen]   = useState(false)
   const [active,   setActive]     = useState('')
@@ -51,7 +51,7 @@ export default function Header({ onRequestClick }) {
       <div className="header__inner">
 
         <a href="/" className="header__logo">
-          <span className="header__logo-by">By</span> OT's
+          <span className="header__logo-by">By</span> OT's Studio
         </a>
 
         <ul className={`header__links${menuOpen ? ' header__links--open' : ''}`}>
@@ -74,13 +74,23 @@ export default function Header({ onRequestClick }) {
           </svg>
         </button>
 
-        <button
-          className={`header__burger${menuOpen ? ' header__burger--open' : ''}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
-        >
-          <span /><span /><span />
-        </button>
+        {isPanier
+          ? (
+            <button className="header__panier-close" onClick={onPanierClose} aria-label="Fermer le panier">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </button>
+          ) : (
+            <button
+              className={`header__burger${menuOpen ? ' header__burger--open' : ''}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Menu"
+            >
+              <span /><span /><span />
+            </button>
+          )
+        }
 
       </div>
     </header>
